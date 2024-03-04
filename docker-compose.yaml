@@ -25,7 +25,7 @@ services:
       retries: 10
 
   query-service:
-    image: ion21/query-service:v2
+    image: ion21/query-service:v1
     networks:
       - mynet
     environment:
@@ -34,7 +34,7 @@ services:
       - "8082:8082"
 
   command-service:
-    image: ion21/command-service:v2
+    image: ion21/command-service:v1
     networks:
       - mynet
     ports:
@@ -46,7 +46,7 @@ services:
         condition: service_healthy
 
   nserver-service:
-    image: ion21/nserver-service:v2
+    image: ion21/nserver-service:v1
     networks:
       - mynet
     ports:
@@ -59,7 +59,7 @@ services:
 
 
   edge:
-    image: ion21/gateway-service:v2
+    image: ion21/gateway-service:v1
     networks:
       - mynet
     ports:
@@ -71,13 +71,13 @@ services:
 
 
   client:
-    image: ion21/client-service:v2
+    image: ion21/client-service:v1
     networks:
       - mynet
     ports:
       - "3000:3000"
     environment:
-      - NODE_ENV =production
+      - NODE_ENV=production
       - REACT_APP_PATH_TO=production
 
     depends_on:
