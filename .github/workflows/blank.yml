@@ -15,10 +15,10 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-#      - name: List files in the root of the repository
-#        run: |
-#            pwd
-#            ls -la
+      - name: List files in the root of the repository
+        run: |
+            pwd
+            ls -la
 #      - name: Find and echo the path of docker-compose.yaml
 #        run: |
 #            FILE_PATH=$(find . -type f -name "docker-compose.yaml")
