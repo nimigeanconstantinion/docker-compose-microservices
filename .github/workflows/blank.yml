@@ -67,6 +67,9 @@ jobs:
             ls 
             pwd
             echo "Flag3"
+            cd docker-compose-microservices/
+            ls
+            echo "Flag4"
             scp -o StrictHostKeyChecking=no docker-compose.yaml ubuntu@${{ env.EC2_INSTANCE_IP }}:/home/doker/docker-compose.yaml
             ssh -o StrictHostKeyChecking=no ubuntu@${{ env.EC2_INSTANCE_IP }} "cd /home/doker/ && docker-compose up -d"
         env:
