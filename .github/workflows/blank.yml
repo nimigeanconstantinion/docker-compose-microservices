@@ -15,7 +15,7 @@ jobs:
     steps:
       - name: Find and echo the path of docker-compose.yaml
         run: |
-            FILE_PATH=$(find . -type f -name "docker-compose.yaml" 2>/dev/null)
+            FILE_PATH=$(find . -type f -name "docker-compose.yaml")
             echo "Path of the docker-compose.yaml file: $FILE_PATH"
       - name: Deploy to EC2
         run: |
