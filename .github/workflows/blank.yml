@@ -68,6 +68,7 @@ jobs:
             pwd
             echo "Flag3"
             sudo find / -type f -name "docker-compose.yaml"
+            echo "Flag4"
             scp -o StrictHostKeyChecking=no /home/runner/work/docker-compose-microservices/docker-compose.yaml ubuntu@${{ env.EC2_INSTANCE_IP }}:/home/doker/docker-compose.yaml
             ssh -o StrictHostKeyChecking=no ubuntu@${{ env.EC2_INSTANCE_IP }} "cd /home/doker/ && docker-compose up -d"
         env:
