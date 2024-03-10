@@ -13,6 +13,10 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: List files in the root of the repository
+        run: |
+            pwd
+            ls -la
       - name: Find and echo the path of docker-compose.yaml
         run: |
             FILE_PATH=$(find . -type f -name "docker-compose.yaml")
