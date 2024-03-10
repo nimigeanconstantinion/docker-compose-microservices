@@ -68,7 +68,7 @@ jobs:
             pwd
             echo "Flag3"
            
-            scp -o StrictHostKeyChecking=no /home/runner/work/docker-compose-microservices/docker-compose-microservices/docker-compose.yaml ubuntu@${{ env.EC2_INSTANCE_IP }}:/home/doker/docker-compose.yaml
+            scp -o StrictHostKeyChecking=no /home/runner/work/docker-compose-microservices/docker-compose.yaml ubuntu@${{ env.EC2_INSTANCE_IP }}:/home/doker/docker-compose.yaml
             ssh -o StrictHostKeyChecking=no ubuntu@${{ env.EC2_INSTANCE_IP }} "cd /home/doker/ && docker-compose up -d"
         env:
             EC2_SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
