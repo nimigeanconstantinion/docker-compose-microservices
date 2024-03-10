@@ -59,7 +59,7 @@ services:
 
 
   edge:
-    image: ion21/gateway-service:09.03.2024.10.04.30
+    image: ion21/gateway-service:10.03.2024.18.45.46
     networks:
       - mynet
     ports:
