@@ -19,10 +19,7 @@ jobs:
         run: |
             pwd
             ls -la
-#      - name: Find and echo the path of docker-compose.yaml
-#        run: |
-#            FILE_PATH=$(find . -type f -name "docker-compose.yaml")
-#            echo "Path of the docker-compose.yaml file: $FILE_PATH"
+
       - name: Deploy to EC2
         run: |
             sudo apt-get update
@@ -30,12 +27,10 @@ jobs:
             mkdir -p ~/.ssh
             echo "${{ secrets.EC2_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
             chmod 600 ~/.ssh/id_rsa
-#            echo "Flag2"
-#            ls -la
-#            pwd
-#            echo "Flag3"
-#            sudo find / -type f -name "docker-compose.yaml"
-#            echo "Flag4"
+            echo "Flag2"
+            ls -la
+            pwd
+            echo "Flag3"
             scp -v -o StrictHostKeyChecking=no ./docker-compose.yaml ubuntu@${{ env.EC2_INSTANCE_IP }}:/home/doker/docker-compose.yaml
             ssh -o StrictHostKeyChecking=no ubuntu@${{ env.EC2_INSTANCE_IP }} "cd /home/doker/ && docker-compose up -d"
         env:
