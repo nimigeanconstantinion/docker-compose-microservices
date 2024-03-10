@@ -64,10 +64,10 @@ jobs:
             echo "${{ secrets.EC2_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
             chmod 600 ~/.ssh/id_rsa
             echo "Flag2"
-            ls 
+            ls -la
             pwd
             echo "Flag3"
-           
+            sudo find / -type f -name "docker-compose.yaml"
             scp -o StrictHostKeyChecking=no /home/runner/work/docker-compose-microservices/docker-compose.yaml ubuntu@${{ env.EC2_INSTANCE_IP }}:/home/doker/docker-compose.yaml
             ssh -o StrictHostKeyChecking=no ubuntu@${{ env.EC2_INSTANCE_IP }} "cd /home/doker/ && docker-compose up -d"
         env:
