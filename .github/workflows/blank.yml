@@ -61,9 +61,9 @@ jobs:
             sudo apt-get update
             sudo apt-get install -y ssh
             mkdir -p ~/.ssh
-            echo "Am facut folderul"
             echo "${{ secrets.EC2_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
             chmod 600 ~/.ssh/id_rsa
+            echo "Flag1"
             scp -o StrictHostKeyChecking=no docker-compose.yaml ubuntu@${{ env.EC2_INSTANCE_IP }}:/home/doker/docker-compose.yaml
             ssh -o StrictHostKeyChecking=no ubuntu@${{ env.EC2_INSTANCE_IP }} "cd /home/doker/ && docker-compose up -d"
         env:
