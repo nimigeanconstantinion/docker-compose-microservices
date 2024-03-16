@@ -46,7 +46,7 @@ services:
         condition: service_healthy
 
   nserver-service:
-    image: ion21/nserver-service:09.03.2024.08.05.03
+    image: ion21/server-service:09.03.2024.08.05.03
     networks:
       - mynet
     ports:
