@@ -31,8 +31,8 @@ jobs:
             ls -la
             pwd
             echo "Flag3"
-            scp -v -o StrictHostKeyChecking=no ./docker-compose.yaml ec2-user@${{ env.EC2_INSTANCE_IP }}:/home/ec2-user/scripts/docker-compose.yaml
-            ssh -o StrictHostKeyChecking=no ec2-user@${{ env.EC2_INSTANCE_IP }} "cd /home/ec2-user/scripts/ && podman-compose up -d"
+            scp -v -o StrictHostKeyChecking=no ./docker-compose.yaml ubuntu@${{ env.EC2_INSTANCE_IP }}:/home/ubuntu/scripts/docker-compose.yaml
+            ssh -o StrictHostKeyChecking=no ubuntu@${{ env.EC2_INSTANCE_IP }} "cd /home/ubuntu/scripts/ && podman-compose up -d"
         env:
             EC2_SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
-            EC2_INSTANCE_IP: 34.247.33.30
+            EC2_INSTANCE_IP: 3.255.229.181
