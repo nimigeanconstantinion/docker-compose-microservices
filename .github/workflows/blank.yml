@@ -30,7 +30,7 @@ jobs:
             echo "Flag2"
             ls -la
             pwd
-            sudo -i
+#            sudo -i
             echo "Flag3"
             scp -v -o StrictHostKeyChecking=no ./docker-compose.yaml ec2-user@${{ env.EC2_INSTANCE_IP }}:/home/ec2-user/scripts/docker-compose.yaml
             ssh -o StrictHostKeyChecking=no ec2-user@${{ env.EC2_INSTANCE_IP }} "cd /home/ec2-user/scripts/ && podman container stop $(podman container ls -aq) && podman container rm $(podman container ls -aq) && podman-compose up -d"
