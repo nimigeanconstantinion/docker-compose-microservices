@@ -22,8 +22,8 @@ jobs:
 
       - name: Deploy to EC2
         run: |
-            sudo dnf update -y
-            sudo dnf install -y openssh-clients
+            sudo yum update -y
+            sudo yum install -y openssh-clients
             mkdir -p ~/.ssh
             echo "${{ secrets.EC2_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
             chmod 600 ~/.ssh/id_rsa
