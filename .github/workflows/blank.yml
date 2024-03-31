@@ -22,20 +22,19 @@ jobs:
 
       - name: Deploy to EC2
         run: |
-            sudo -i
-            dnf update -y
-            dnf install -y openssh-clients
+            sudo apt-get update
+            sudo apt-get install -y ssh
             mkdir -p ~/.ssh
             echo "${{ secrets.EC2_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
             chmod 600 ~/.ssh/id_rsa
             echo "Flag2"
             ls -la
             pwd
-            
-            podman stop -a
+            sudo -i
             echo "Flag3"
             scp -v -o StrictHostKeyChecking=no ./docker-compose.yaml ec2-user@${{ env.EC2_INSTANCE_IP }}:/home/ec2-user/scripts/docker-compose.yaml
-            ssh -o StrictHostKeyChecking=no ec2-user@${{ env.EC2_INSTANCE_IP }} "cd /home/ec2-user/scripts/ && podman-compose up -d"
+            ssh -o StrictHostKeyChecking=no ec2-user@${{ env.EC2_INSTANCE_IP }} "cd /home/ec2-user/scripts/ && podman container stop $(podman container ls -aq) && podman container rm $(podman container ls -aq) && podman-compose up -d"
+#            ssh -o StrictHostKeyChecking=no ec2-user@${{ env.EC2_INSTANCE_IP }} "cd /home/ec2-user/scripts/ && podman-compose up -d"
         env:
             EC2_SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
             EC2_INSTANCE_IP: 34.247.255.42
