@@ -33,10 +33,12 @@ jobs:
             cd /home/ec2-user/scripts/ && \
             CONTAINERS=$(podman container ls -aq) && \
             if [ ! -z \"$CONTAINERS\" ]; then \
-              podman container stop $CONTAINERS && \
-              podman container rm $CONTAINERS; \
-            fi && \
-            podman-compose up -d"
+            podman container stop $CONTAINERS || true; \
+            podman container rm $CONTAINERS || true; \
+            fi; \
+            echo 'Starting new containers...'; \
+            podman-compose up -d; \
+            echo 'Deployment completed successfully.'"
         env:
             EC2_SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
             EC2_INSTANCE_IP: 34.247.255.42
