@@ -77,8 +77,8 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - NODE_ENV=production
-      - REACT_APP_PATH_TO=production
+      - NODE_ENV=development
+      - REACT_APP_PATH_TO=development
 
     depends_on:
       - edge
