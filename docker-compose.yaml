@@ -71,7 +71,7 @@ services:
 
 
   client:
-    image: ion21/client-service:01.04.2024.07.54.08
+    image: ion21/client-service:01.04.2024.08.02.48
     networks:
       - mynet
     ports:
