@@ -30,7 +30,7 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           scp -o StrictHostKeyChecking=no ./docker-compose.yaml ec2-user@${{ env.EC2_INSTANCE_IP }}:/home/ec2-user/scripts/docker-compose.yaml
           ssh -o StrictHostKeyChecking=no ec2-user@${{ env.EC2_INSTANCE_IP }} "\
-            cd /home/ec2-user/scripts/ && \
+            cd /home/ec2-user/scripts/ && ./init.sh && \
             CONTAINERS=$(podman container ls -aq) && \
             if [ ! -z \"$CONTAINERS\" ]; then \
             podman container stop $CONTAINERS || true; \
