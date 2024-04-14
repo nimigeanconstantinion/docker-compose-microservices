@@ -79,6 +79,7 @@ services:
     environment:
       - NODE_ENV=development
       - REACT_APP_PATH_TO=development
+      - REACT_APP_API_URL=http://34.247.255.42:5000/
 
     depends_on:
       - edge
