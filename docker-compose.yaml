@@ -79,7 +79,7 @@ services:
 
 
   discovery-service:
-    image: ion21/discovery-service:12.05.2024.15.31.56
+    image: ion21/discovery-service:12.05.2024.15.59.08
     networks:
       - mynet
     ports:
