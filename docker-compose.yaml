@@ -9,7 +9,7 @@ volumes:
 
 services:
   discovery-service:
-    image: ion21/discovery-service:v2
+    image: ion21/discovery-service:12.05.2024.17.05.30
     networks:
       - mynet
     ports:
@@ -105,7 +105,7 @@ services:
 <<<<<<< HEAD
 =======
   discovery-service:
-    image: ion21/discovery-service:12.05.2024.16.19.39
+    image: ion21/discovery-service:12.05.2024.17.05.30
     networks:
       - mynet
     ports:
