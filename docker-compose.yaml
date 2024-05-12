@@ -54,7 +54,7 @@ services:
       mysql:
         condition: service_healthy
   edge:
-    image: ion21/gateway-service:14.04.2024.14.44.47
+    image: ion21/gateway-service:12.05.2024.16.06.44
     networks:
       - mynet
     ports:
