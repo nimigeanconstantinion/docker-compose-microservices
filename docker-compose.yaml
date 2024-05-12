@@ -57,7 +57,7 @@ services:
         condition: service_started
 
   nserver-service:
-    image: ion21/server-service:23.04.2024.07.17.52
+    image: ion21/server-service:12.05.2024.16.43.51
     networks:
       - mynet
     ports:
@@ -71,7 +71,7 @@ services:
           condition: service_started
 
   edge:
-    image: ion21/gateway-service:14.04.2024.14.44.47
+    image: ion21/gateway-service:12.05.2024.16.06.44
     networks:
       - mynet
     ports:
@@ -102,3 +102,12 @@ services:
 
 
 
+<<<<<<< HEAD
+=======
+  discovery-service:
+    image: ion21/discovery-service:12.05.2024.16.19.39
+    networks:
+      - mynet
+    ports:
+      - "8761:8761"
+>>>>>>> d4ee9a637998c7312fa0febd7567838151edfa1e
