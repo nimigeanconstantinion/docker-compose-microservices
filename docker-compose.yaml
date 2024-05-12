@@ -8,6 +8,13 @@ volumes:
   db_data:
 
 services:
+  discovery-service:
+    image: ion21/discovery-service:v2
+    networks:
+      - mynet
+    ports:
+      - "8761:8761"
+
   mysql:
     image: mysql:5.7
     environment:
@@ -31,6 +38,10 @@ services:
       SPRING_PROFILES_ACTIVE: docker
     ports:
       - "8082:8082"
+    depends_on:
+      discovery-service:
+        condition: service_started
+
   command-service:
     image: ion21/command-service:01.04.2024.11.44.42
     networks:
@@ -42,6 +53,9 @@ services:
     depends_on:
       mysql:
         condition: service_healthy
+      discovery-service:
+        condition: service_started
+
   nserver-service:
     image: ion21/server-service:23.04.2024.07.17.52
     networks:
@@ -51,8 +65,11 @@ services:
     environment:
       SPRING_PROFILES_ACTIVE: docker
     depends_on:
-      mysql:
-        condition: service_healthy
+       mysql:
+          condition: service_healthy
+       discovery-service:
+          condition: service_started
+
   edge:
     image: ion21/gateway-service:14.04.2024.14.44.47
     networks:
@@ -62,7 +79,10 @@ services:
     environment:
       SPRING_PROFILES_ACTIVE: docker
     depends_on:
-      - nserver-service
+        nserver-service:
+          condition: service_started
+        discovery-service:
+          condition: service_started
   client:
     image: ion21/client-service:07.05.2024.11.11.15
     networks:
@@ -75,12 +95,10 @@ services:
       - REACT_APP_API_URL=http://34.247.255.42:5000
 
     depends_on:
-      - edge
+        edge:
+          condition: service_started
+        discovery-service:
+          condition: service_started
 
 
-  discovery-service:
-    image: ion21/discovery-service:v2
-    networks:
-      - mynet
-    ports:
-      - "8761:8761"
+
