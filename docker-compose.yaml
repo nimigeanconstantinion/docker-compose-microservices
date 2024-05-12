@@ -64,7 +64,7 @@ services:
     depends_on:
       - nserver-service
   client:
-    image: ion21/client-service:27.04.2024.18.12.39
+    image: ion21/client-service:07.05.2024.11.11.15
     networks:
       - mynet
     ports:
