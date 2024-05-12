@@ -31,7 +31,7 @@ services:
       timeout: 20s
       retries: 10
   query-service:
-    image: ion21/query-service:09.03.2024.09.43.18
+    image: ion21/query-service:12.05.2024.16.58.23
     networks:
       - mynet
     environment:
