@@ -77,7 +77,10 @@ services:
     environment:
       SPRING_PROFILES_ACTIVE: docker
     depends_on:
-        - nserver-service
+        discovery-service:
+          condition: service_started
+        nserver-service:
+          condition: service_started
 
   client:
     image: ion21/client-service:07.05.2024.11.11.15
