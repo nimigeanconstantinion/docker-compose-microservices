@@ -33,7 +33,7 @@ services:
 
 
   query-service:
-    image: ion21/query-service:12.05.2024.16.58.23
+    image: ion21/query-service:13.05.2024.15.22.02
     networks:
       - mynet
     environment:
