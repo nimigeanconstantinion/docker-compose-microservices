@@ -9,7 +9,7 @@ volumes:
 
 services:
   discovery-service:
-    image: ion21/discovery-service:12.05.2024.17.05.30
+    image: ion21/new-discovery-service:12.05.2024.17.05.30
     networks:
       - mynet
     ports:
@@ -30,6 +30,8 @@ services:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
       timeout: 20s
       retries: 10
+
+
   query-service:
     image: ion21/query-service:12.05.2024.16.58.23
     networks:
@@ -83,6 +85,7 @@ services:
           condition: service_started
         discovery-service:
           condition: service_started
+
   client:
     image: ion21/client-service:07.05.2024.11.11.15
     networks:
@@ -102,12 +105,12 @@ services:
 
 
 
-<<<<<<< HEAD
-=======
-  discovery-service:
-    image: ion21/discovery-service:12.05.2024.17.05.30
-    networks:
-      - mynet
-    ports:
-      - "8761:8761"
->>>>>>> d4ee9a637998c7312fa0febd7567838151edfa1e
+#<<<<<<< HEAD
+#=======
+#  discovery-service:
+#    image: ion21/discovery-service:12.05.2024.17.05.30
+#    networks:
+#      - mynet
+#    ports:
+#      - "8761:8761"
+#>>>>>>> d4ee9a637998c7312fa0febd7567838151edfa1e
