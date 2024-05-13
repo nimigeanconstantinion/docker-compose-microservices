@@ -9,7 +9,7 @@ volumes:
 
 services:
   discovery-service:
-    image: ion21/new-discovery-service:12.05.2024.17.05.30
+    image: ion21/new-discovery-service:13.05.2024.05.27.10
     networks:
       - mynet
     ports:
