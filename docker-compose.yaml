@@ -65,6 +65,8 @@ services:
     depends_on:
        mysql:
           condition: service_healthy
+       discovery-service:
+         condition: service_started
 
   edge:
     image: ion21/gateway-service:12.05.2024.16.06.44
