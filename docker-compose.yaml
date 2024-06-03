@@ -42,7 +42,7 @@ services:
       - "8082:8082"
 
   command-service:
-    image: ion21/command-service:01.04.2024.11.44.42
+    image: ion21/command-service:03.06.2024.14.27.27
     networks:
       - mynet
     ports:
