@@ -32,7 +32,7 @@ services:
       retries: 1
 
   query-service:
-    image: ion21/query-service:03.06.2024.14.48.03
+    image: ion21/query-service:05.06.2024.14.30.19
     networks:
       - mynet
     environment:
@@ -41,7 +41,7 @@ services:
       - "8082:8082"
 
   command-service:
-    image: ion21/command-service:03.06.2024.14.27.27
+    image: ion21/command-service:05.06.2024.14.36.42
     networks:
       - mynet
     ports:
@@ -54,7 +54,7 @@ services:
           service_healthy
 
   nserver-service:
-    image: ion21/server-service:03.06.2024.15.34.10
+    image: ion21/server-service:05.06.2024.14.48.37
     networks:
       - mynet
     ports:
@@ -68,7 +68,7 @@ services:
          condition: service_started
 
   edge:
-    image: ion21/gateway-service:13.05.2024.11.17.37
+    image: ion21/gateway-service:05.06.2024.14.43.30
     networks:
       - mynet
     ports:
