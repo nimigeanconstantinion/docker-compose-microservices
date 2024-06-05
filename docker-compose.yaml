@@ -29,8 +29,7 @@ services:
     healthcheck:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
       timeout: 20s
-      retries: 10
-
+      retries: 1
 
   query-service:
     image: ion21/query-service:03.06.2024.14.48.03
