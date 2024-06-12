@@ -32,7 +32,7 @@ services:
       retries: 1
 
   query-service:
-    image: ion21/query-service:05.06.2024.16.02.27
+    image: ion21/query-service:12.06.2024.11.26.45
     networks:
       - mynet
     environment:
