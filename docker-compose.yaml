@@ -9,7 +9,7 @@ volumes:
 
 services:
   discovery-service:
-    image: ion21/newdiscovery:01.07.2024.09.38.31
+    image: ion21/newdiscovery:01.07.2024.14.39.29
     networks:
       - mynet
     ports:
@@ -32,7 +32,7 @@ services:
       retries: 1
 
   query-service:
-    image: ion21/query-service:01.07.2024.09.50.36
+    image: ion21/query-service:01.07.2024.14.43.49
     networks:
       - mynet
     environment:
@@ -44,7 +44,7 @@ services:
         condition: service_started
 
   command-service:
-    image: ion21/command-service:01.07.2024.09.54.34
+    image: ion21/command-service:01.07.2024.14.47.44
     networks:
       - mynet
     ports:
@@ -60,7 +60,7 @@ services:
 
 
   nserver-service:
-    image: ion21/server-service:01.07.2024.11.41.11
+    image: ion21/server-service:01.07.2024.14.54.53
     networks:
       - mynet
     ports:
@@ -77,7 +77,7 @@ services:
          condition: service_started
 
   edge:
-    image: ion21/gateway-service:01.07.2024.11.40.00
+    image: ion21/gateway-service:01.07.2024.14.29.22
     networks:
       - mynet
     ports:
@@ -103,7 +103,7 @@ services:
 
 
   client:
-    image: ion21/client-service:07.05.2024.11.11.15
+    image: ion21/client-service:01.07.2024.14.50.49
     networks:
       - mynet
     ports:
