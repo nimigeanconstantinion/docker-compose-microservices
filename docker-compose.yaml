@@ -93,6 +93,12 @@ services:
       - mynet
     ports:
       - "9411:9411"
+    depends_on:
+      nserver-service:
+        condition: service_started
+      edge:
+        condition: service_started
+
   client:
     image: ion21/client-service:07.05.2024.11.11.15
     networks:
