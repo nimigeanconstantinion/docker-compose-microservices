@@ -60,7 +60,7 @@ services:
 
 
   nserver-service:
-    image: ion21/server-service:01.07.2024.14.32.33
+    image: ion21/server-service:01.07.2024.14.54.53
     networks:
       - mynet
     ports:
