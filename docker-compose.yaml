@@ -15,9 +15,7 @@ services:
     ports:
       - "8761:8761"
     environment:
-      ZIPKIN_COLLECTOR_HOST: zipkin
-      ZIPKIN_COLLECTOR_PORT: 9411
-
+      SPRING_ZIPKIN_BASE_URL: http://zipkin:9411
 
   mysql:
     image: mysql:5.7
@@ -31,7 +29,7 @@ services:
     volumes:
       - db_data:/var/lib/mysql
     healthcheck:
-      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       timeout: 20s
       retries: 1
 
@@ -41,9 +39,7 @@ services:
       - mynet
     environment:
       SPRING_PROFILES_ACTIVE: docker
-      ZIPKIN_COLLECTOR_HOST: zipkin
-      ZIPKIN_COLLECTOR_PORT: 9411
-
+      SPRING_ZIPKIN_BASE_URL: http://zipkin:9411
     ports:
       - "8082:8082"
     depends_on:
@@ -60,13 +56,10 @@ services:
       - "8081:8081"
     environment:
       SPRING_PROFILES_ACTIVE: docker
-      ZIPKIN_COLLECTOR_HOST: zipkin
-      ZIPKIN_COLLECTOR_PORT: 9411
-
+      SPRING_ZIPKIN_BASE_URL: http://zipkin:9411
     depends_on:
       mysql:
-        condition:
-          service_healthy
+        condition: service_healthy
       discovery-service:
         condition: service_started
       zipkin:
@@ -80,38 +73,31 @@ services:
       - "8080:8080"
     environment:
       SPRING_PROFILES_ACTIVE: docker
-      SPRING_ZIPKIN_BASE-URL: http://zipkin/
-      ZIPKIN_COLLECTOR_HOST: zipkin
-      ZIPKIN_COLLECTOR_PORT: 9411
-
-
+      SPRING_ZIPKIN_BASE_URL: http://zipkin:9411
     depends_on:
-       mysql:
-          condition: service_healthy
-       discovery-service:
-         condition: service_started
-       zipkin:
-         condition: service_started
+      mysql:
+        condition: service_healthy
+      discovery-service:
+        condition: service_started
+      zipkin:
+        condition: service_started
 
   edge:
-    image: ion21/gateway-service:01.07.2024.17.33.02
+    image: ion21/gateway-service:01.07.2024.21.02.32
     networks:
       - mynet
     ports:
       - "5000:5000"
     environment:
       SPRING_PROFILES_ACTIVE: docker
-      ZIPKIN_COLLECTOR_HOST: zipkin
-      ZIPKIN_COLLECTOR_PORT: 9411
-
-#      SPRING_ZIPKIN_BASE-URL: http://zipkin:9411/
+      SPRING_ZIPKIN_BASE_URL: http://zipkin:9411
     depends_on:
-        discovery-service:
-          condition: service_started
-        nserver-service:
-          condition: service_started
-        zipkin:
-          condition: service_started
+      discovery-service:
+        condition: service_started
+      nserver-service:
+        condition: service_started
+      zipkin:
+        condition: service_started
 
   zipkin:
     image: openzipkin/zipkin
@@ -133,7 +119,6 @@ services:
 #    ports:
 #      - "9411:9411"
 
-
   client:
     image: ion21/client-service:01.07.2024.14.50.49
     networks:
@@ -144,7 +129,5 @@ services:
       - NODE_ENV=development
       - REACT_APP_PATH_TO=development
       - REACT_APP_API_URL=http://34.247.255.42:5000
-
     depends_on:
       - edge
-
