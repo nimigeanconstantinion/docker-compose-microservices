@@ -120,6 +120,18 @@ services:
       - mynet
     ports:
       - "9411:9411"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:9411/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+
+#  zipkin:
+#    image: openzipkin/zipkin
+#    container_name: zipkin
+#    networks:
+#      - mynet
+#    ports:
+#      - "9411:9411"
 
 
   client:
