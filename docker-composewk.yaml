@@ -6,8 +6,6 @@ networks:
 
 volumes:
   db_data:
-  es_data:
-  logstash_pipeline:
 
 services:
   discovery-service:
@@ -113,6 +111,14 @@ services:
       interval: 30s
       timeout: 10s
 
+#  zipkin:
+#    image: openzipkin/zipkin
+#    container_name: zipkin
+#    networks:
+#      - mynet
+#    ports:
+#      - "9411:9411"
+
   client:
     image: ion21/client-service:01.07.2024.14.50.49
     networks:
@@ -125,36 +131,3 @@ services:
       - REACT_APP_API_URL=http://34.247.255.42:5000
     depends_on:
       - edge
-
-  elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.9
-    environment:
-      - discovery.type=single-node
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-    networks:
-      - mynet
-    ports:
-      - "9200:9200"
-    volumes:
-      - es_data:/usr/share/elasticsearch/data
-
-  logstash:
-    image: docker.elastic.co/logstash/logstash:7.17.9
-    networks:
-      - mynet
-    ports:
-      - "5044:5044"
-    volumes:
-      - C:\logstash_pipeline:/usr/share/logstash/pipeline
-    depends_on:
-      - elasticsearch
-    command: logstash -f /usr/share/logstash/pipeline/logstash.conf
-
-  kibana:
-    image: docker.elastic.co/kibana/kibana:7.17.9
-    networks:
-      - mynet
-    ports:
-      - "5601:5601"
-    depends_on:
-      - elasticsearch
