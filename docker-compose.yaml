@@ -107,18 +107,6 @@ services:
       zipkin:
         condition: service_started
 
-#  zipkin:
-#    image: openzipkin/zipkin
-#    container_name: zipkin
-#    networks:
-#      - mynet
-#    ports:
-#      - "9411:9411"
-#    healthcheck:
-#      test: ["CMD-SHELL", "curl -f http://localhost:9411/health || exit 1"]
-#      interval: 30s
-#      timeout: 10s
-
   client:
     image: ion21/client-service:01.07.2024.14.50.49
     networks:
@@ -177,7 +165,7 @@ services:
     container_name: kibana
     environment:
       ELASTICSEARCH_HOSTS: 'http://elasticsearch:9200'
-      ELASTICSEARCH_USERNAME: 'kibana_system'
+      ELASTICSEARCH_USERNAME: 'elastic'
       ELASTICSEARCH_PASSWORD: *kibana_password
       TELEMETRY_ENABLED: 'false'
     networks:
