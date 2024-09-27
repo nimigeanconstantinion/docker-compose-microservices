@@ -6,6 +6,8 @@ networks:
 
 volumes:
   db_data:
+  microsrv_kibana_data:
+  microsrv_es_data:
 
 services:
   discovery-service:
