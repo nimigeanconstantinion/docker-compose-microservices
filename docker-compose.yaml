@@ -117,6 +117,8 @@ services:
       - NODE_ENV=development
       - REACT_APP_PATH_TO=development
       - REACT_APP_API_URL=http://34.247.255.42:5000
+#      - REACT_APP_API_URL=http://localhost:5000
+
     depends_on:
       - edge
 
@@ -165,7 +167,7 @@ services:
     container_name: kibana
     environment:
       ELASTICSEARCH_HOSTS: 'http://elasticsearch:9200'
-      ELASTICSEARCH_USERNAME: 'elastic'
+      ELASTICSEARCH_USERNAME: 'kibana_system'
       ELASTICSEARCH_PASSWORD: *kibana_password
       TELEMETRY_ENABLED: 'false'
       bootstrap.memory_lock: 'true'
@@ -188,7 +190,7 @@ services:
       CONFIG_STRING: |
         input {
           tcp {
-            port => 3000
+            port => 3100
             codec => json_lines
           }
         }
