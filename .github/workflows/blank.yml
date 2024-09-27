@@ -42,3 +42,4 @@ jobs:
         env:
             EC2_SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
             EC2_INSTANCE_IP: 34.247.255.42
+            bootstrap.memory_lock: 'false'
