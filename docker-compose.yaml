@@ -168,6 +168,8 @@ services:
       ELASTICSEARCH_USERNAME: 'elastic'
       ELASTICSEARCH_PASSWORD: *kibana_password
       TELEMETRY_ENABLED: 'false'
+      bootstrap.memory_lock: 'true'
+
     networks:
       - mynet
     ports:
@@ -182,6 +184,7 @@ services:
     container_name: logstash
     environment:
       ELASTIC_PASSWORD: *elastic_password
+      bootstrap.memory_lock: 'true'
       CONFIG_STRING: |
         input {
           tcp {
@@ -210,6 +213,8 @@ services:
     environment:
       ELASTIC_PASSWORD: *elastic_password
       KIBANA_PASSWORD: *kibana_password
+      bootstrap.memory_lock: 'true'
+
     command:
       - bash
       - -c
