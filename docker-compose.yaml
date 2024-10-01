@@ -74,7 +74,7 @@ services:
         condition: service_started
 
   nserver-service:
-    image: ion21/server-service:27.09.2024.06.38.49
+    image: ion21/server-service:01.10.2024.15.58.07
     networks:
       - mynet
     ports:
