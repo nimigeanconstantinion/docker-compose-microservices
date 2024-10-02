@@ -108,7 +108,7 @@ services:
         condition: service_started
 
   client:
-    image: ion21/client-service:01.07.2024.14.50.49
+    image: ion21/client-service:02.10.2024.11.35.34
     networks:
       - mynet
     ports:
