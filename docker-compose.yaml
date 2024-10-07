@@ -82,6 +82,7 @@ services:
     environment:
       SPRING_PROFILES_ACTIVE: docker
       SPRING_ZIPKIN_BASE_URL: http://zipkin:9411
+      ADDITIONAL_CORS_ORIGIN: "http://localhost:5000,http://localhost:3000,http://63.32.92.152:3000,http://63.32.92.152:5000"
     depends_on:
       mysql:
         condition: service_healthy
