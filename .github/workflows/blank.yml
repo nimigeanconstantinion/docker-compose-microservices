@@ -41,5 +41,4 @@ jobs:
             echo 'Deployment completed successfully.'"
         env:
             EC2_SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
-            EC2_INSTANCE_IP: 34.248.81.77
-
+            EC2_INSTANCE_IP: 63.32.92.152
