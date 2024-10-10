@@ -9,6 +9,7 @@ volumes:
   kibana_data: # Definirea volumului
   es_data:
   logstash_pipeline:
+  prometheus_data:
 
 x-variables:
   elastic_password: &elastic_password 'passwOrd'
