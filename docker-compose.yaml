@@ -10,6 +10,9 @@ volumes:
   es_data:
   logstash_pipeline:
   prometheus_data:
+  grafana_data:
+  grafana_provisioning:
+    driver: local
 
 x-variables:
   elastic_password: &elastic_password 'passwOrd'
@@ -260,7 +263,7 @@ services:
     ports:
       - '9090:9090'
     depends_on:
-      - service
+      - edge
     networks:
       - mynet
 
