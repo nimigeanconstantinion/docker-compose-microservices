@@ -15,7 +15,6 @@ x-variables:
   elastic_password: &elastic_password 'passwOrd'
   kibana_password: &kibana_password 'passwOrd'
 
-
 services:
   discovery-service:
     image: ion21/newdiscovery:01.07.2024.14.39.29
@@ -242,7 +241,6 @@ services:
       PROMETHEUS_CONFIG: |
         global:
           scrape_interval: 15s
-  
         scrape_configs:
           - job_name: 'spring-boot-apps'
             metrics_path: '/actuator/prometheus'
@@ -252,13 +250,50 @@ services:
                   - 'command-service:8081'
                   - 'query-service:8082'
                   - 'nserver-service:8080'
+                  - 'edge:5000'
     entrypoint:
       - /bin/sh
       - -c
       - |
-        echo "$PROMETHEUS_CONFIG" > /etc/prometheus/prometheus.yml
+        echo "$${PROMETHEUS_CONFIG}" > /etc/prometheus/prometheus.yml
         /bin/prometheus --config.file=/etc/prometheus/prometheus.yml
     ports:
       - '9090:9090'
+    depends_on:
+      - service
     networks:
       - mynet
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3200:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=secret
+    depends_on:
+      - prometheus
+    networks:
+      - mynet
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - grafana_provisioning:/etc/grafana/provisioning
+    entrypoint:
+      - /bin/sh
+      - -c
+      - |
+        mkdir -p /etc/grafana/provisioning/datasources
+        mkdir -p /etc/grafana/provisioning/dashboards
+        echo '
+        apiVersion: 1
+
+        datasources:
+          - name: Prometheus
+            type: prometheus
+            access: proxy
+            isDefault: true
+            url: http://prometheus:9090
+            version: 1
+            editable: false
+        ' > /etc/grafana/provisioning/datasources/datasource.yml
+        /run.sh
