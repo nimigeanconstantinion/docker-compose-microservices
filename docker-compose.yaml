@@ -255,6 +255,17 @@ services:
       KIBANA_PASSWORD: *kibana_password
       bootstrap.memory_lock: 'true'
 
+#    command:
+#      - bash
+#      - -c
+#      - |
+#        echo "Waiting for Elasticsearch availability";
+#        until curl -s http://elasticsearch:9200 | grep -q "missing authentication credentials"; do sleep 10; done;
+#        echo "Setting kibana_system password";
+#        until curl -s -X POST -u "elastic:$${ELASTIC_PASSWORD}" -H "Content-Type: application/json" \
+#          http://elasticsearch:9200/_security/user/kibana_system/_password \
+#          -d "{\"password\":\"$${KIBANA_PASSWORD}\"}" | grep -q "^{}"; do sleep 10; done;
+#        echo "All done!";
     command:
       - bash
       - -c
@@ -265,6 +276,40 @@ services:
         until curl -s -X POST -u "elastic:$${ELASTIC_PASSWORD}" -H "Content-Type: application/json" \
           http://elasticsearch:9200/_security/user/kibana_system/_password \
           -d "{\"password\":\"$${KIBANA_PASSWORD}\"}" | grep -q "^{}"; do sleep 10; done;
+        echo "Creating index template for logstash-*";
+        curl -s -X PUT -u "elastic:$${ELASTIC_PASSWORD}" -H "Content-Type: application/json" \
+          http://elasticsearch:9200/_template/logstash_template \
+          -d '{
+            "index_patterns": ["logstash-*"],
+            "mappings": {
+              "properties": {
+                "message": {
+                  "type": "text",
+                  "fields": {
+                    "keyword": {
+                      "type": "keyword",
+                      "ignore_above": 256
+                    }
+                  }
+                },
+                "commUpd.id": {
+                  "type": "integer"
+                },
+                "commUpd.articol": {
+                  "type": "text"
+                },
+                "commUpd.id_furniz": {
+                  "type": "integer"
+                },
+                "commUpd.furnizor": {
+                  "type": "text"
+                },
+                "commUpd.nr_zile": {
+                  "type": "integer"
+                }
+              }
+            }
+          }';
         echo "All done!";
     networks:
       - mynet
