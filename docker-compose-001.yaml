@@ -184,34 +184,6 @@ services:
     volumes:
       - kibana_data:/usr/share/kibana/data # Montează volumul pentru datele Kibana
 
-#  logstash:
-#    image: docker.elastic.co/logstash/logstash:8.12.1
-#    container_name: logstash
-#    environment:
-#      ELASTIC_PASSWORD: *elastic_password
-#      bootstrap.memory_lock: 'true'
-#      CONFIG_STRING: |
-#        input {
-#          tcp {
-#            port => 3100
-#            codec => json_lines
-#          }
-#        }
-#        output {
-#          elasticsearch {
-#            hosts => ["http://elasticsearch:9200"]
-#            user => "elastic"
-#            password => "$${ELASTIC_PASSWORD}"
-#            ssl => false
-#          }
-#        }
-#    networks:
-#      - mynet
-#    ports:
-#      - "3100:3100"
-#    depends_on:
-#      - elasticsearch
-
   logstash:
     image: docker.elastic.co/logstash/logstash:8.12.1
     container_name: logstash
@@ -223,13 +195,6 @@ services:
           tcp {
             port => 3100
             codec => json_lines
-          }
-        }
-        filter {
-          grok {
-            match => {
-              "message" => "commUpd:Optional\\[id:%{NUMBER:commUpd.id};articol:%{DATA:commUpd.articol};id_furniz:%{NUMBER:commUpd.id_furniz};furnizor:%{DATA:commUpd.furnizor};nr_zile:%{NUMBER:commUpd.nr_zile}\\]\\."
-            }
           }
         }
         output {
