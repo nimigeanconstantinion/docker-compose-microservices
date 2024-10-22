@@ -119,8 +119,8 @@ services:
     environment:
       - NODE_ENV=development
       - REACT_APP_PATH_TO=development
-      - REACT_APP_API_URL=http://63.32.92.152:5000
-#      - REACT_APP_API_URL=http://78.96.25.131:5000
+#      - REACT_APP_API_URL=http://63.32.92.152:5000
+      - REACT_APP_API_URL=http://localhost:5000
 
     depends_on:
       - edge
@@ -228,7 +228,7 @@ services:
         filter {
           grok {
             match => {
-              "message" => "commUpd:Optional\\[id:%{NUMBER:commUpd.id};articol:%{DATA:commUpd.articol};id_furniz:%{NUMBER:commUpd.id_furniz};furnizor:%{DATA:commUpd.furnizor};nr_zile:%{NUMBER:commUpd.nr_zile}\\]\\."
+              "message" => "cmdUpd: Optional\\[id:%{NUMBER:commUpd.id};articol:%{DATA:commUpd.articol};id_furniz:%{NUMBER:commUpd.id_furniz};furnizor:%{DATA:commUpd.furnizor};nr_zile:%{NUMBER:commUpd.nr_zile}\\]\\."
             }
           }
         }
