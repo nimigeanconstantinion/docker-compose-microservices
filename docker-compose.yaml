@@ -61,7 +61,7 @@ services:
         condition: service_started
 
   command-service:
-    image: ion21/command-service:22.10.2024.04.48.53
+    image: ion21/command-service:16.11.2024.16.22.33
     networks:
       - mynet
     ports:
@@ -78,7 +78,7 @@ services:
         condition: service_started
 
   nserver-service:
-    image: ion21/server-service:23.10.2024.16.12.17
+    image: ion21/server-service:16.11.2024.16.54.28
     networks:
       - mynet
     ports:
@@ -113,7 +113,7 @@ services:
         condition: service_started
 
   client:
-    image: ion21/client-service:02.10.2024.11.59.05
+    image: ion21/client-service:16.11.2024.16.34.54
     networks:
       - mynet
     ports:
