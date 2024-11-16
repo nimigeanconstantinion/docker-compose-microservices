@@ -12,6 +12,8 @@ volumes:
   grafana_data:
   grafana_provisioning:
     driver: local
+  rabbitmq_data:
+  rabbitmq_log:
 
 x-variables:
   elastic_password: &elastic_password 'passwOrd'
@@ -125,6 +127,20 @@ services:
     depends_on:
       - edge
 
+  rabbitmq:
+    image: rabbitmq:3.9.11-management-alpine
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - mynet
+
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+      - rabbitmq_log:/var/log/rabbitmq
+    restart: always
+    
   zipkin:
     image: openzipkin/zipkin
     container_name: zipkin
