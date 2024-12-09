@@ -86,7 +86,7 @@ services:
     environment:
       SPRING_PROFILES_ACTIVE: docker
       SPRING_ZIPKIN_BASE_URL: http://zipkin:9411
-      ADDITIONAL_CORS_ORIGIN: "http://localhost:5000,http://localhost:3000,http://63.32.92.152:3000,http://63.32.92.152:5000,http://icode.mywire.org:5000,http://icode.mywire.org:3000"
+      ADDITIONAL_CORS_ORIGIN: "http://localhost:5000,http://localhost:3000,http://54.155.119.235:3000,http://54.155.119.235:5000,http://icode.mywire.org:5000,http://icode.mywire.org:3000"
     depends_on:
       mysql:
         condition: service_healthy
@@ -121,9 +121,9 @@ services:
     environment:
       - NODE_ENV=development
       - REACT_APP_PATH_TO=development
-#      - REACT_APP_API_URL=http://63.32.92.152:5000
-#      - REACT_APP_API_URL=http://localhost:5000
-      - REACT_APP_API_URL=http://icode.mywire.org:5000
+#      - REACT_APP_API_URL=http://54.155.119.235:5000
+      - REACT_APP_API_URL=http://localhost:5000
+     # - REACT_APP_API_URL=http://icode.mywire.org:5000
 
     depends_on:
       - edge
