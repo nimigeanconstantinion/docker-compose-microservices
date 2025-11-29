@@ -61,7 +61,7 @@ services:
         condition: service_started
 
   command-service:
-    image: ion21/command-service:03.11.2025.18.36.41
+    image: ion21/command-service:29.11.2025.08.18.48
     networks:
       - mynet
     ports:
