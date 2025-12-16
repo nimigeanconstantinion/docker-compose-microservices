@@ -96,7 +96,7 @@ services:
         condition: service_started
 
   edge:
-    image: ion21/gateway-service:15.12.2025.20.09.14
+    image: ion21/gateway-service:16.12.2025.09.08.45
     networks:
       - mynet
     ports:
